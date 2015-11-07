@@ -55,25 +55,24 @@ enum {
 
 uint8_t sequenceData[NUMBER_OF_STEPS][NUMBER_OF_VOICE] = {
   {1, 0, 0, 0},
-  {0, 0, 1, 0},
-  {0, 0, 0, 1},
+  {0, 0, 0, 0},
+  {0, 0, 0, 0},
   {0, 0, 0, 0},
   
-  {1, 1, 0, 0},
-  {0, 0, 1, 0},
-  {0, 0, 0, 1},
-  {0, 1, 0, 0},
+  {0, 0, 0, 0},
+  {0, 0, 0, 0},
+  {0, 0, 0, 0},
+  {0, 0, 0, 0},
   
-  {1, 0, 0, 0},
-  {0, 1, 1, 0},
-  {0, 0, 0, 1},
-  {0, 1, 0, 0},
+  {0, 0, 0, 0},
+  {0, 0, 0, 0},
+  {0, 0, 0, 0},
+  {0, 0, 0, 0},
   
-  {1, 0, 0, 0},
-  {0, 0, 1, 0},
-  {0, 0, 0, 1},
-  {0, 1, 0, 0},
-  
+  {0, 0, 0, 0},
+  {0, 0, 0, 0},
+  {0, 0, 0, 0},
+  {0, 0, 0, 0},
 };
 uint8_t currentStep = 0;
 uint8_t* currentStepData = sequenceData[currentStep];
@@ -159,6 +158,7 @@ void updateControl()
     if (canPlayback[Index_Kick]) { //押しっぱなしではない場合は
       canPlayback[Index_Kick] = false; // 押しっぱなしで何度も再生されないようにして
       kick.start(); // サンプルを再生する
+      currentStepData[Index_Kick] = 1; // シーケンサーに録音
     }
   } else { // スイッチがオフになったら、スイッチを押すと再生できるようにする。
     canPlayback[Index_Kick] = true;
@@ -170,6 +170,7 @@ void updateControl()
     if (canPlayback[Index_Snare]) {
       canPlayback[Index_Snare] = false; 
       snare.start();
+      currentStepData[Index_Snare] = 1;
     }
   } else {
     canPlayback[Index_Snare] = true;
@@ -180,6 +181,7 @@ void updateControl()
     if (canPlayback[Index_CH]) {
       canPlayback[Index_CH] = false; 
       hat.start();
+      currentStepData[Index_CH] = 1;
     }
   } else {
     canPlayback[Index_CH] = true;
@@ -190,6 +192,7 @@ void updateControl()
     if (canPlayback[Index_OH]) {
       canPlayback[Index_OH] = false; 
       oh.start();
+      currentStepData[Index_OH] = 1;
     }
   } else {
     canPlayback[Index_OH] = true;
