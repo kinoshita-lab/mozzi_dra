@@ -152,7 +152,7 @@ void updateControl()
     triggerOn[Index_OH] = false;
     oh.start();
   }
-  return;
+ 
   // スイッチを読み、Onになっていたらサンプルを再生します。1回Offになったら再度再生できます。
   // Kick
   if (digitalRead(Kick)) { //スイッチを読んで、Onだったら、
