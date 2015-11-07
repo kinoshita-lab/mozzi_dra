@@ -87,7 +87,6 @@ void timer()
   }
   
   currentStepData = sequenceData[currentStep];
-  Serial.println(currentStepData[Index_Kick]);
   
   // kick
   if (currentStepData[Index_Kick]) {
@@ -109,6 +108,15 @@ void timer()
     triggerOn[Index_OH] = true;
   }
   
+  // ボリュームの値を読んで、テンポを設定します。
+  const int volume = mozziAnalogRead(1);
+  int tempo = 1023 - volume; // ボリュームを時計回りに回すと早くしたいので、値を逆にします。
+  if (tempo < 40) { // 速すぎ防止
+    tempo = 40;
+  }  
+ 
+  MsTimer2::set(tempo, timer);
+  MsTimer2::start();
 }
 
 void setup()
